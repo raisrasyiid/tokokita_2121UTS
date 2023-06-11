@@ -6,13 +6,12 @@ class Madmin extends CI_Model{
 
 		return $this->db->get_where('tbl_admin',array('userName' => $this->input->post('username')));
 		return $this->db->get_where('tbl_admin',array('password' => $this->input->post('password')));
-   
 		}	
 
 	public function m_cek_maill() {
 
 		return $this->db->get_where('tbl_admin',array('password' => $this->input->post('password')));
-	   
+		
 		}	
 
 	public function cek_login($u, $p){

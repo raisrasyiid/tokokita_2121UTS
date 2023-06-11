@@ -10,13 +10,15 @@ class Toko extends CI_Controller {
 
 	public function index(){
 		$data['toko']=$this->Madmin->get_all_data('tbl_toko')->result();
-		$this->load->view('home/layout/header');
+		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$this->load->view('home/layout/header', $data);
 		$this->load->view('home/toko/index', $data);
 		$this->load->view('home/layout/footer');
 	}
 
 	public function add(){
-		$this->load->view('home/layout/header');
+		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$this->load->view('home/layout/header',$data);
 		$this->load->view('home/toko/form_tambah');
 		$this->load->view('home/layout/footer');
 	}
@@ -66,7 +68,8 @@ class Toko extends CI_Controller {
 		}
 		$dataWhere = array('idToko'=>$id);
 		$data['toko'] = $this->Madmin->get_by_id('tbl_toko', $dataWhere)->row_object();
-		$this->load->view('home/layout/header');
+		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$this->load->view('home/layout/header',$data);
 		$this->load->view('home/toko/formEdit', $data);
 		$this->load->view('home/layout/footer');
 	}

@@ -10,7 +10,9 @@ class Main extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('home/layout/header');
+		$data['produk'] = $this->Madmin->get_all_data('tbl_produk')->result();
+		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$this->load->view('home/layout/header', $data);
 		$this->load->view('home/layanan');
 		$this->load->view('home/home');
 		$this->load->view('home/layout/footer');
@@ -18,7 +20,8 @@ class Main extends CI_Controller {
 
 	public function register()
 	{
-		$this->load->view('home/layout/header');
+		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$this->load->view('home/layout/header',$data);
 		$this->load->view('home/register');
 		$this->load->view('home/layout/footer');
 	}
@@ -37,7 +40,8 @@ class Main extends CI_Controller {
 	}
 
 	public function login(){
-		$this->load->view('home/layout/header');
+		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$this->load->view('home/layout/header', $data);
 		$this->load->view('home/login');
 		$this->load->view('home/layout/footer');	
 	}
@@ -64,7 +68,8 @@ class Main extends CI_Controller {
 	}
 
 	public function dashboard(){
-		$this->load->view('home/layout/header');
+		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$this->load->view('home/layout/header', $data);
 		$this->load->view('home/dashboard');
 		$this->load->view('home/layout/footer');
 	}

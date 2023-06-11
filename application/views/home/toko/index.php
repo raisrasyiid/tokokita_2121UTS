@@ -25,7 +25,8 @@
       <td><img src="<?php echo base_url('assets/logo_toko/'.$val->logo); ?>" width="150" height="110"></td>
       <td><?php echo $val->deskripsi; ?></td>
 	  <td><div class="btn-group" role="group" aria-label="Basic example">
-      <a href="<?php echo site_url('toko/get_by_id/'.$val->idToko);?>" class="btn btn-warning">Edit</a>
+      <a href="<?php echo site_url('toko/get_by_id/'.$val->idToko);?>" class="btn btn-secondary">Edit</a>
+      <a href="<?php echo site_url('produk/index/'.$val->idToko);?>" class="btn btn-warning">Kelola Toko</a>
       <a href="<?php echo site_url('toko/delete/'.$val->idToko);?>" onclick="return confirm('Yakin Akan Hapus Data Ini?')" class="btn btn-danger">Hapus</a>
 </div>
 </td>
