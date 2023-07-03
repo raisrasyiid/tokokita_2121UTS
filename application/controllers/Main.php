@@ -6,6 +6,7 @@ class Main extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Madmin');
+		$this->load->library('cart');
 	}
 
 	public function index()
@@ -110,5 +111,43 @@ class Main extends CI_Controller {
 	public function logout(){
 		$this->session->sess_destroy();
 		redirect('main/login');
+	}
+
+	function detail_produk($idProduk) {
+		$dataWhere = array('idProduk' => $idProduk);
+		$data['produk'] = $this->Madmin->get_by_id('tbl_produk', $dataWhere)->row_object();
+		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$this->load->view('home/layout/header',$data);
+		$this->load->view('home/detail_produk',$data);
+		$this->load->view('home/layout/footer');
+	}
+
+	function add_cart($idProduk){
+		$dataWhere = array('idProduk' => $idProduk);
+		$produk = $this->Madmin->get_by_id('tbl_produk',$dataWhere)->row_object();
+
+		//add cart
+		$data = array(
+			'id' => $produk->idProduk,
+			'qty'=>1,
+			'price' => $produk->harga,
+			'name' => $produk->namaProduk,
+			'image' => $produk->foto
+		);
+		$this->cart->insert($data);
+		redirect('main/cart');
+	}
+
+	function cart() {
+		$data['cartItems'] = $this->cart->contents();
+		$data['kategori'] = $this->Madmin->get_all_data('tbl_kategori')->result();
+		$this->load->view('home/layout/header',$data);
+		$this->load->view('home/cart',$data);
+		$this->load->view('home/layout/footer');
+	}
+
+	function delete_cart($rowid) {
+		$remove = $this->cart->remove($rowid);
+		redirect('main/cart');
 	}
 }
